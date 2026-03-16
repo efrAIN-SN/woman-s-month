@@ -1,0 +1,845 @@
+
+:root {
+    --purple-light: #C000C0; 
+    --purple-dark: #6C00A5;  
+    
+    --metallic-silver: #E0D7E7;
+    --metallic-shadow-dark: #4A0070;
+    --metallic-highlight: #FFFFFF;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Changed from just center to help content flow */
+    justify-content: flex-start; /* Start from top so content can grow downwards */
+    align-items: center;
+
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    
+    /* CHANGE THIS: */
+    overflow-y: auto; /* Allows vertical scrolling only when content overflows */
+    overflow-x: hidden; /* Keeps the page from shaking left-to-right */
+}
+
+.hero-container {
+    width: 100vw;
+    height: 100vh;
+    
+    background-image: 
+        url('../assets/pcos-graphics-bg.png'), 
+        radial-gradient(circle, var(--purple-light) 0%, var(--purple-dark) 80%); 
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: grid;
+    place-items: center;
+    text-align: center;
+    
+    padding: 2rem; 
+}
+
+.hero-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px; 
+    padding: 20px;
+    z-index: 10; 
+}
+
+
+.title-graphic {
+    width: 100%;      
+    height: auto;     
+    display: block;
+    
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    
+    animation: fadeInScale 0.8s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- Info Page Specifics --- */
+.info-page {
+    background-color: var(--purple-dark);
+    /* Reusing the same organic texture background from page 1 */
+    background-image: url('../assets/purple-bg.png'); 
+    background-size: cover;
+    color: #FFFFFF;
+    line-height: 1.6;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-height: 100vh;
+}
+
+/* Header Logo Sizing */
+.info-header {
+    text-align: center;
+}
+
+.small-logo {
+    max-width: 300px; /* Scaled down from the hero version */
+    height: auto;
+}
+
+/* --- The Layout Grid --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr; /* Center column slightly wider */
+    gap: 30px;
+    align-items: start;
+}
+
+/* Column Styling */
+.info-column h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.info-column p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    text-align: justify; /* Matches the design's blocky text feel */
+}
+
+/* Infographic Image Styling */
+.info-graphic img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border: 8px solid rgba(255, 255, 255, 0.1); /* Subtle frame */
+}
+
+/* --- Responsive Design (Mobile Friendly) --- */
+@media (max-width: 900px) {
+    .info-grid {
+        grid-template-columns: 1fr; /* Stack columns on mobile */
+        text-align: center;
+    }
+    
+    .info-column p {
+        text-align: center;
+    }
+
+    .info-graphic {
+        order: -1; /* Move chart to the top on small screens */
+    }
+}
+
+/* Add this to your style.css */
+
+.hero-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer; /* Critical: tells the user this is clickable */
+}
+
+.hero-link:hover {
+    /* Subtle "lift" effect when hovered */
+    transform: translateY(-5px) scale(1.02);
+    /* Increase the glow/brightness slightly */
+    filter: drop-shadow(0 15px 30px rgba(192, 0, 192, 0.4)) brightness(1.1);
+}
+
+.hero-link:active {
+    /* "Pressed" effect when clicked */
+    transform: translateY(0) scale(0.98);
+}
+
+/* --- Secondary Section Styling --- */
+.info-section-secondary {
+    position: relative;
+    padding: 60px 40px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    
+    /* Apply the new background image */
+    background-image: url('../assets/purple-bg2.png'); 
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+}
+
+.secondary-content {
+    flex: 1;
+    max-width: 650px; /* Limits width for optimal reading length */
+    font-family: 'Inter', sans-serif;
+    color: #FFFFFF;
+}
+
+.intro-text, .mood-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Custom List Styling */
+.symptoms-list {
+    list-style: none; /* Remove default bullets */
+    padding-left: 20px;
+    margin-bottom: 2rem;
+}
+
+.symptoms-list li {
+    position: relative;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-left: 25px;
+}
+
+/* Creating custom white bullets */
+.symptoms-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+}
+
+/* Smooth floating animation for the floral asset */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 800px) {
+    .info-section-secondary {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .symptoms-list {
+        padding-left: 0;
+        display: inline-block;
+        text-align: left;
+    }
+    
+    .flower-decoration {
+        margin-top: 30px;
+        flex: 0 0 auto;
+    }
+}
+
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+
+
+::-webkit-scrollbar-track {
+    background: #4A0070; 
+    border-left: 1px solid rgba(255, 255, 255, 0.05); 
+}
+
+/* 3. The Thumb: The draggable handle. 
+      I've used a gradient here to mimic the metallic 'PCOS' text effect. */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        to bottom, 
+        #C000C0, /* Purple light */
+        #E0D7E7  /* Metallic Silver highlight */
+    );
+    border-radius: 20px; /* Fully rounded for an 'organic' feel */
+    border: 3px solid #4A0070; /* This creates a 'gap' around the handle */
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FFFFFF;
+    cursor: grab;
+}
+
+
+::-webkit-scrollbar-thumb:active {
+    background: #E0D7E7;
+}
+
+
+/* --- Page Section (Pink Layout) --- */
+.info-section-page {
+    position: relative;
+    padding: 60px 40px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+
+    /* Using your new background asset */
+    background-image: url('../assets/pink-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.page-container {
+    display: flex;
+    max-width: 1100px;
+    gap: 50px;
+    align-items: center;
+}
+
+/* Left Column Styling */
+.page-left {
+    flex: 1;
+    text-align: left;
+}
+
+.page-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+.page-title span {
+    font-size: 5rem;
+    font-weight: 900;
+    color: #4A0070; /* Deep purple from your design */
+    display: block;
+}
+
+.girl-img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+    position: left;
+}
+
+/* Right Column Styling */
+.page-right {
+    flex: 1.5;
+    background: rgba(255, 255, 255, 0.15); /* Soft glass effect */
+    padding: 40px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.page-right p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    color: #4A0070; /* High contrast text */
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.page-right strong {
+    font-weight: 800;
+    color: #6C00A5;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+    .page-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .page-left, .page-right {
+        flex: none;
+        width: 100%;
+    }
+    
+    .page-title span {
+        font-size: 4rem;
+    }
+}
+/* 1. Make the container the reference point */
+.page-left {
+    position: relative; /* This is the 'anchor' */
+    min-height: 500px;  /* Ensure there is enough vertical space for her */
+}
+
+/* 2. Position the girl relative to that anchor */
+.girl-img-positioned {
+    position: absolute;
+    
+    /* ADJUST THESE TWO VALUES TO MOVE HER: */
+    bottom: -20px;  /* Moves her up or down. Negative goes lower. */
+    right: 10px;    /* Moves her left or right. */
+    
+    width: 280px;   /* Control her size here */
+    height: auto;
+    z-index: 5;     /* Ensures she stays above the background */
+    
+    /* Optional: subtle shadow to make her pop from the dark pink */
+    filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.2));
+}
+/* --- Section 6: Health Risks Layout --- */
+.info-section-risks {
+    padding: 100px 5%;
+    background-image: url('../assets/purple-bg3.png'); /* Reusing the dark purple background */
+    background-size: cover;
+    color: white;
+}
+
+.risks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Typography Enhancements */
+.risks-header h2 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.risks-header h2 span {
+    display: block;
+    font-size: 4.5rem;
+    color: var(--metallic-silver);
+}
+
+.lead-text {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+/* Risk Item Styling */
+.risk-item h3, .infertility-panel h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.risk-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.risk-content.reverse {
+    flex-direction: row;
+}
+
+.risk-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* Image Handling */
+.risk-img {
+    width: 200px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.main-risk-img {
+    width: 100%;
+    height: auto;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 25px;
+}
+
+/* Infertility Panel (Right Side) */
+.infertility-panel {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.infertility-panel p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+    .risks-grid {
+        grid-template-columns: 1fr; /* Stack into one column */
+    }
+    
+    .risk-content {
+        flex-direction: column !important;
+    }
+    
+    .risk-img {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+/* --- Section 9: Personal Story Styling --- */
+.info-section-story {
+    padding: 100px 5%;
+    background-color: var(--deep-bg); /* Dark purple background */
+    display: flex;
+    justify-content: center;
+}
+
+.story-container {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+.story-main-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    color: var(--metallic-silver);
+    text-decoration: underline;
+    text-underline-offset: 10px;
+}
+
+.story-content {
+    background: rgba(255, 255, 255, 0.05); /* Soft container for readability */
+    padding: 60px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.story-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+/* Quote Styling */
+.story-quote {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--purple-light);
+    margin: 40px 0;
+    padding: 20px;
+    border-left: 4px solid var(--purple-light);
+    background: rgba(192, 0, 192, 0.1);
+    text-align: left;
+}
+
+/* Callout Box for the final advice */
+.story-callout {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, var(--purple-dark), var(--purple-light));
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* --- Mobile Story Adjustment --- */
+@media (max-width: 768px) {
+    .story-content {
+        padding: 30px;
+    }
+    .story-main-title {
+        font-size: 1.8rem;
+    }
+}
+/* --- Section 10: Advice Column --- */
+.info-section-advice {
+    width: 100%;
+    min-height: 100vh; /* Takes a full screen of scrolling */
+    padding: 0; /* Resetting standard padding for full bleed layout */
+    margin: 0;
+}
+
+.advice-layout {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* --- Left Pink Sidebar --- */
+.advice-sidebar {
+    flex: 0 0 200px; /* Fixed width of the pink bar */
+    background-color: #E294E2; /* Lighter pink from design */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.advice-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 5rem;
+    color: #FFFFFF;
+    
+    /* Key Pro Tip: Writing text vertically */
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+
+/* --- Right Dark Purple Content --- */
+.advice-content {
+    flex: 1; /* Takes up all remaining space */
+    background-color: var(--deep-bg); /* Dark purple from previous sections */
+    color: #FFFFFF;
+    padding: 80px 10%; /* Generous padding for optimal reading length */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers the text */
+}
+
+.advice-content p {
+    font-family: 'Poppins', sans-serif; /* A heavy weight Poppins works well here */
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    text-align: justify;
+    max-width: 900px;
+}
+
+.advice-content p strong {
+    font-weight: 700;
+    color: #FFFFFF; /* High contrast bolding */
+}
+
+.advice-content .final-summary {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+    .advice-layout {
+        flex-direction: column; 
+        height: auto;
+    }
+    
+    .advice-sidebar {
+        flex: 0 0 auto;
+        width: 100%;
+        padding: 40px;
+    }
+    
+    .advice-title {
+        writing-mode: horizontal-tb; 
+        transform: rotate(0);
+        font-size: 3rem;
+    }
+    
+    .advice-content {
+        padding: 40px;
+    }
+    
+    .advice-content p {
+        text-align: left;
+    }
+}
+/* --- Global Font Setup --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+.info-section-final {
+    background-color: #4A0070;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- Risk Blocks --- */
+.serious-risks-container {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.risk-block {
+    margin-bottom: 80px;
+}
+
+.risk-main-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 30px;
+}
+
+.risk-grid-inner {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.risk-grid-inner.reverse {
+    flex-direction: row-reverse; /* Flips image to the other side */
+}
+
+.medical-diagram {
+    width: 45%; /* Limits image size so it doesn't break the layout */
+    height: auto;
+    border-radius: 10px;
+    background: white; /* Makes diagrams easier to read */
+    padding: 10px;
+}
+
+.risk-description {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* --- Advice Layout (The Split Screen) --- */
+.advice-split-layout {
+    display: flex;
+    min-height: 600px;
+    border-top: 2px solid rgba(255,255,255,0.1);
+}
+
+.advice-sidebar {
+    flex: 0 0 150px; /* Fixed pink bar width */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 10px;
+}
+
+.advice-main-content {
+    flex: 1;
+    padding: 60px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.advice-main-content p {
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* --- Mobile Fix --- */
+@media (max-width: 900px) {
+    .risk-grid-inner, .risk-grid-inner.reverse {
+        flex-direction: column;
+    }
+    .medical-diagram {
+        width: 100%;
+    }
+    .advice-split-layout {
+        flex-direction: column;
+    }
+    .advice-sidebar {
+        height: 150px;
+        width: 100%;
+    }
+    .vertical-text {
+        writing-mode: horizontal-tb;
+        transform: rotate(0);
+        font-size: 3rem;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+.about-us-final {
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.note-container {
+    /* These dimensions center the text over the paper in your png */
+    width: 100%;
+    max-width: 650px; 
+    padding: 40px;
+    margin-top: 20px; /* Adjust based on where the paper sits in your image */
+    text-align: left;
+}
+
+.note-header {
+    font-family: 'Indie Flower', cursive;
+    font-size: 3.5rem;
+    color: #4b4b4b;
+    margin-bottom: 35px;
+    margin-left: 60px; 
+}
+
+.note-body p {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.6rem;
+    color: #555;
+    line-height: 2.2rem; 
+    margin-bottom: 25px;
+    margin-left: 80px; 
+    max-width: 500px;
+}
+
+
+@media (max-width: 768px) {
+    .note-container {
+        padding: 20px;
+    }
+    .note-header {
+        font-size: 2.5rem;
+        margin-left: 20px;
+    }
+    .note-body p {
+        font-size: 1.2rem;
+        margin-left: 30px;
+    }
+}
+
